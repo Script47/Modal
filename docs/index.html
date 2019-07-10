@@ -84,8 +84,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
     <script>
       Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/'
-
     </script>
+    <script>
+	/**
+	 * @author Script47 (https://github.com/Script47/Modal)
+	 * @description Modal - A Bootstrap 4.2+ jQuery plugin for the modal component
+	 * @version 0.0.1
+	 **/
+	(function(e){e.modal=function(b){var a="",f="modal-"+(e("modal").length+1),c=b.title,d="",k="",h=b.content,g=b.buttons||[],l="modal-"+b.size||"",m="undefined"===typeof b.backdrop?!0:b.backdrop,n="undefined"===typeof b.keyboard?!0:b.keyboard,p="undefined"===typeof b.focus?!0:b.focus;switch(b.type||"info"){case "info":d="bg-info border-info text-white";k="undefined"===typeof h&&0===g.length?"bg-info border-info":"border-info";break;case "success":d="bg-success border-success text-white";k="undefined"===
+	typeof h&&0===g.length?"bg-success border-success":"border-success";break;case "warning":case "warn":d="bg-warning border-warning text-white";k="undefined"===typeof h&&0===g.length?"bg-warning border-warning":"border-warning";break;case "error":case "danger":d="bg-danger border-danger text-white",k="undefined"===typeof h&&0===g.length?"bg-danger border-danger":"border-danger"}a=a+('<div class="modal fade" id="'+f+'" tabindex="-1" role="dialog" aria-labelledby="'+f+'-title" aria-hidden="false">')+
+	('<div class="modal-dialog modal-dialog-centered '+l+'" role="document">')+('<div class="modal-content '+k+'">');a+='<div class="modal-header '+d+'">';a=a+('<h5 class="modal-title" id="'+f+'-title">'+c+"</h5>")+'<button type="button" class="close" data-dismiss="modal" aria-label="Close">';a+='<span aria-hidden="true">&times;</span>';a+="</button>";a+="</div>";"undefined"!==typeof h&&(a+='<div class="modal-body">',a+=h,a+="</div>");if(0<g.length){a+='<div class="modal-footer">';for(b=0;b<g.length;b++){c=
+	g[b];d=c.id||f+"-"+c.type+"-"+b;switch(c.type){case "dismiss":a+='<button type="button" id="'+d+'" class="'+(c["class"]||"btn btn-secondary")+'" data-dismiss="modal">'+c.label+"</button>";break;case "toggle":break;default:a+='<button type="'+(c.type||"button")+'" id="'+d+'" class="'+(c["class"]||"btn btn-primary")+'">'+c.label+"</button>"}if(c.hasOwnProperty("callback"))e(document).on("click","#"+d,c.callback)}a+="</div>"}a+="</div>";a+="</div>";a+="</div>";e("body").append(a);e("#"+f).modal({backdrop:m,
+	keyboard:n,focus:p,show:!0});e("#"+f).on("hidden.bs.modal",function(a){e(this).remove()});return e("#"+f)}})(jQuery);    
+    </script>		  
     <script>
       var TYPES = ['info', 'warning', 'success', 'error'],
         TITLES = {
