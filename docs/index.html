@@ -9,14 +9,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha256-xY7/SUa769r0PZ1ytZPFj2WqnOZYaYSKbX1hVTiQlcA=" crossorigin="anonymous" />
 
-    <style>
-  	#j-1 {
-  		-webkit-box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 1);
-  		-moz-box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 1);
-  		box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 1);
-	}
-    </style>
-	  
     <title>Modal - A Bootstrap 4.0+ jQuery plugin for the modal component</title>
   </head>
 
@@ -27,20 +19,60 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="card">
-        <div class="card-header font-weight-bold text-center">Simple</div>
+    <div class="container pb-4">
+      <div class="card mb-3">
+        <div class="card-header font-weight-bold text-center">Simple Example</div>
         <div class="card-body">
           <pre><code id="simple-code" class="language-javascript">$.modal({
-    type: 'success', // 'info', 'success', 'warning', 'error'
-    title: 'Awesome!',
-    content: 'The action has been completed.'
+    type: "success", // "info", "success", "warning", "error"
+    title: "Awesome!",
+    content: "The action has been completed."
 });</code></pre>
         </div>
         <div class="card-footer p-0">
           <button class="btn btn-block btn-primary rounded-0" onclick="simple()">Show</button>
         </div>
       </div>
+      
+     <div class="card mb-3">
+        <div class="card-header font-weight-bold text-center">Title Only Example</div>
+        <div class="card-body">
+          <pre><code id="title-only-code" class="language-javascript">$.modal({
+    type: "success", // "info", "success", "warning", "error"
+    title: "Awesome!"
+});</code></pre>
+        </div>
+        <div class="card-footer p-0">
+          <button class="btn btn-block btn-primary rounded-0" onclick="title_only()">Show</button>
+        </div>
+      </div> 
+      
+     <div class="card">
+        <div class="card-header font-weight-bold text-center">Buttons Example</div>
+        <div class="card-body">
+          <pre><code id="buttons-code" class="language-javascript">$.modal({
+	type: "success", // "info", "success", "warning", "error",
+	title: "Awesome!",
+  	content: "The action has been completed.",
+    buttons: [
+    	{
+    		type: "button", // "submit", "button",
+    		label: "Click Me!",
+			callback: function () {
+      			alert("Hey! You clicked me.");
+    		}
+    	},
+		{
+			type: "dismiss", // dismiss will hide the modal 
+    		label: "Close"
+  		}
+	] 
+});</code></pre>
+        </div>
+        <div class="card-footer p-0">
+          <button class="btn btn-block btn-primary rounded-0" onclick="buttons()">Show</button>
+        </div>
+      </div>       
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -52,18 +84,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
     <script>
       Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/'
-    </script>
-    <script>
-      /**
-       * @author Script47 (https://github.com/Script47/Modal)
-       * @description Modal - A Bootstrap 4.2+ jQuery plugin for the modal component
-       * @version 0.0.1
-       **/
-      (function(e){e.modal=function(b){var a="",f="modal-"+(e("modal").length+1),c=b.title,d="",k="",h=b.content,g=b.buttons||[],l="modal-"+b.size||"",m="undefined"===typeof b.backdrop?!0:b.backdrop,n="undefined"===typeof b.keyboard?!0:b.keyboard,p="undefined"===typeof b.focus?!0:b.focus;switch(b.type||"info"){case "info":d="bg-info border-info text-white";k="undefined"===typeof h&&0===g.length?"bg-info border-info":"border-info";break;case "success":d="bg-success border-success text-white";k="undefined"===
-      typeof h&&0===g.length?"bg-success border-success":"border-success";break;case "warning":case "warn":d="bg-warning border-warning text-white";k="undefined"===typeof h&&0===g.length?"bg-warning border-warning":"border-warning";break;case "error":case "danger":d="bg-danger border-danger text-white",k="undefined"===typeof h&&0===g.length?"bg-danger border-danger":"border-danger"}a=a+('<div class="modal fade" id="'+f+'" tabindex="-1" role="dialog" aria-labelledby="'+f+'-title" aria-hidden="false">')+
-      ('<div class="modal-dialog modal-dialog-centered '+l+'" role="document">')+('<div class="modal-content '+k+'">');a+='<div class="modal-header '+d+'">';a=a+('<h5 class="modal-title" id="'+f+'-title">'+c+"</h5>")+'<button type="button" class="close" data-dismiss="modal" aria-label="Close">';a+='<span aria-hidden="true">&times;</span>';a+="</button>";a+="</div>";"undefined"!==typeof h&&(a+='<div class="modal-body">',a+=h,a+="</div>");if(0<g.length){a+='<div class="modal-footer">';for(b=0;b<g.length;b++){c=
-      g[b];d=c.id||f+"-"+c.type+"-"+b;switch(c.type){case "dismiss":a+='<button type="button" id="'+d+'" class="'+(c["class"]||"btn btn-secondary")+'" data-dismiss="modal">'+c.label+"</button>";break;case "toggle":break;default:a+='<button type="'+(c.type||"button")+'" id="'+d+'" class="'+(c["class"]||"btn btn-primary")+'">'+c.label+"</button>"}if(c.hasOwnProperty("callback"))e(document).on("click","#"+d,c.callback)}a+="</div>"}a+="</div>";a+="</div>";a+="</div>";e("body").append(a);e("#"+f).modal({backdrop:m,
-      keyboard:n,focus:p,show:!0});e("#"+f).on("hidden.bs.modal",function(a){e(this).remove()});return e("#"+f)}})(jQuery);
+
     </script>
     <script>
       var TYPES = ['info', 'warning', 'success', 'error'],
@@ -76,10 +97,10 @@
         CONTENT = {
           'info': 'Hello, world! This is a modal message.',
           'success': 'The action has been completed.',
-          'warning': 'It\'s all about to go wrong',
+          'warning': 'It\'s all about to go wrong.',
           'error': 'It all went wrong.'
         };
-
+        
       function simple() {
         var rng = Math.floor(Math.random() * TYPES.length),
           type = TYPES[rng],
@@ -93,12 +114,75 @@
         });
 
         document.getElementById('simple-code').innerHTML = `$.modal({
-	type: '${type}',
-	title: '${title}',
-  	content: '${content}'
+	type: "${type}", // "info", "success", "warning", "error",
+	title: "${title}",
+  	content: "${content}"
 });`;
+				Prism.highlightElement(document.getElementById('simple-code'));
       }
+      
+      function title_only() {
+        var rng = Math.floor(Math.random() * TYPES.length),
+          type = TYPES[rng],
+          title = TITLES[type];
+          
+        $.modal({
+          type: type,
+          title: title
+        });
 
+        document.getElementById('title-only-code').innerHTML = `$.modal({
+	type: "${type}", // "info", "success", "warning", "error"
+	title: "${title}"
+});`;
+				Prism.highlightElement(document.getElementById('title-only-code'));      
+      }
+      
+      function buttons() {
+        var rng = Math.floor(Math.random() * TYPES.length),
+          type = TYPES[rng],
+          title = TITLES[type],
+          content = CONTENT[type];
+
+        $.modal({
+          type: type,
+          title: title,
+          content: content,
+          buttons: [
+          		{
+            		type: 'button',
+              	label: 'Click Me!',
+								callback: function () {
+              		alert('Hey! You clicked me.');
+            		}
+            	},
+          		{
+								type: 'dismiss',
+              	label: 'Close'
+            	}
+          	]
+        });
+
+        document.getElementById('buttons-code').innerHTML = `$.modal({
+	type: "${type}", // "info", "success", "warning", "error",
+	title: "${title}",
+  	content: "${content}",
+    buttons: [
+    	{
+    		type: "button", // "submit", "button",
+    		label: "Click Me!",
+			callback: function () {
+      			alert("Hey! You clicked me.");
+    		}
+    	},
+		{
+			type: "dismiss", // dismiss will hide the modal 
+    		label: "Close"
+  		}
+	] 
+});`;
+				Prism.highlightElement(document.getElementById('buttons-code'));
+      }
     </script>
   </body>
 
