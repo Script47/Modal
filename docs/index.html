@@ -9,13 +9,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha256-xY7/SUa769r0PZ1ytZPFj2WqnOZYaYSKbX1hVTiQlcA=" crossorigin="anonymous" />
 
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
+	  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	  <script>
 	     (adsbygoogle = window.adsbygoogle || []).push({
 		  google_ad_client: "ca-pub-3120714107560901",
 		  enable_page_level_ads: true
 	     });
-	</script>
+		</script>
+  
+    <style>
+    #j-1 {
+      -webkit-box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 1);
+      -moz-box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 1);
+      box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 1);
+    }
+    </style>
 	  
     <title>Modal - A Bootstrap 4.0+ jQuery plugin for the modal component</title>
   </head>
@@ -55,7 +63,20 @@
         </div>
       </div> 
       
-     <div class="card">
+     <div class="card mb-3">
+        <div class="card-header font-weight-bold text-center">Content Only Example</div>
+        <div class="card-body">
+          <pre><code id="content-only-code" class="language-javascript">$.modal({
+	type: "success",
+  	content: "The action has been completed."
+});</code></pre>
+        </div>
+        <div class="card-footer p-0">
+          <button class="btn btn-block btn-primary rounded-0" onclick="content_only()">Show</button>
+        </div>
+      </div>       
+      
+     <div class="card mb-3">
         <div class="card-header font-weight-bold text-center">Buttons Example</div>
         <div class="card-body">
           <pre><code id="buttons-code" class="language-javascript">$.modal({
@@ -78,9 +99,24 @@
 });</code></pre>
         </div>
         <div class="card-footer p-0">
-          <button class="btn btn-block btn-primary rounded-0" onclick="buttons()">Show</button>
+          <button class="btn btn-block btn-primary rounded-0" onclick="buttons();">Show</button>
         </div>
-      </div>       
+      </div>  
+      
+     <div class="card mb-3">
+        <div class="card-header font-weight-bold text-center">Sizes Example</div>
+        <div class="card-body">
+          <pre><code id="size-code" class="language-javascript">$.modal({ 		
+    type: "success",
+  	title: "Awesome!",
+  	content: "The action has been completed.",
+  	size: "lg" // "sm", "" (default), "lg", "xl"
+});</code></pre>
+        </div>
+        <div class="card-footer p-0">
+          <button class="btn btn-block btn-primary rounded-0" onclick="sizes()">Show</button>
+        </div>
+      </div>             
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -99,11 +135,12 @@
 	 * @description Modal - A Bootstrap 4.2+ jQuery plugin for the modal component
 	 * @version 0.0.1
 	 **/
-	(function(e){e.modal=function(b){var a="",f="modal-"+(e("modal").length+1),c=b.title,d="",k="",h=b.content,g=b.buttons||[],l="modal-"+b.size||"",m="undefined"===typeof b.backdrop?!0:b.backdrop,n="undefined"===typeof b.keyboard?!0:b.keyboard,p="undefined"===typeof b.focus?!0:b.focus;switch(b.type||"info"){case "info":d="bg-info border-info text-white";k="undefined"===typeof h&&0===g.length?"bg-info border-info":"border-info";break;case "success":d="bg-success border-success text-white";k="undefined"===
-	typeof h&&0===g.length?"bg-success border-success":"border-success";break;case "warning":case "warn":d="bg-warning border-warning text-white";k="undefined"===typeof h&&0===g.length?"bg-warning border-warning":"border-warning";break;case "error":case "danger":d="bg-danger border-danger text-white",k="undefined"===typeof h&&0===g.length?"bg-danger border-danger":"border-danger"}a=a+('<div class="modal fade" id="'+f+'" tabindex="-1" role="dialog" aria-labelledby="'+f+'-title" aria-hidden="false">')+
-	('<div class="modal-dialog modal-dialog-centered '+l+'" role="document">')+('<div class="modal-content '+k+'">');a+='<div class="modal-header '+d+'">';a=a+('<h5 class="modal-title" id="'+f+'-title">'+c+"</h5>")+'<button type="button" class="close" data-dismiss="modal" aria-label="Close">';a+='<span aria-hidden="true">&times;</span>';a+="</button>";a+="</div>";"undefined"!==typeof h&&(a+='<div class="modal-body">',a+=h,a+="</div>");if(0<g.length){a+='<div class="modal-footer">';for(b=0;b<g.length;b++){c=
-	g[b];d=c.id||f+"-"+c.type+"-"+b;switch(c.type){case "dismiss":a+='<button type="button" id="'+d+'" class="'+(c["class"]||"btn btn-secondary")+'" data-dismiss="modal">'+c.label+"</button>";break;case "toggle":break;default:a+='<button type="'+(c.type||"button")+'" id="'+d+'" class="'+(c["class"]||"btn btn-primary")+'">'+c.label+"</button>"}if(c.hasOwnProperty("callback"))e(document).on("click","#"+d,c.callback)}a+="</div>"}a+="</div>";a+="</div>";a+="</div>";e("body").append(a);e("#"+f).modal({backdrop:m,
-	keyboard:n,focus:p,show:!0});e("#"+f).on("hidden.bs.modal",function(a){e(this).remove()});return e("#"+f)}})(jQuery);    
+(function(g){g.modal=function(a){var b="",h="modal-"+(g("modal").length+1),d=a.title,k="",l="",m="",e=a.content,f=a.buttons||[],n="modal-"+a.size||"",p="undefined"===typeof a.backdrop?!0:a.backdrop,q="undefined"===typeof a.keyboard?!0:a.keyboard,r="undefined"===typeof a.focus?!0:a.focus;switch(a.type||"info"){case "info":k="undefined"!==typeof a.title?"bg-info border-info text-white":"";l="undefined"===typeof e&&0===f.length?"bg-info border-info":"border-info";m="undefined"===typeof d&&"undefined"!==
+typeof e?"bg-info text-white":"";break;case "success":k="undefined"!==typeof a.title?"bg-success border-success text-white":"";l="undefined"===typeof e&&0===f.length?"bg-success border-success":"border-success";m="undefined"===typeof d&&"undefined"!==typeof e?"bg-success text-white":"";break;case "warning":case "warn":k="undefined"!==typeof a.title?"bg-warning border-warning text-white":"";l="undefined"===typeof e&&0===f.length?"bg-warning border-warning":"border-warning";m="undefined"===typeof d&&
+"undefined"!==typeof e?"bg-warning text-white":"";break;case "error":case "danger":k="undefined"!==typeof a.title?"bg-danger border-danger text-white":"",l="undefined"===typeof e&&0===f.length?"bg-danger border-danger":"border-danger",m="undefined"===typeof d&&"undefined"!==typeof e?"bg-danger text-white":""}b+='<div class="modal fade" id="'+h+'" tabindex="-1" role="dialog" aria-labelledby="'+h+'-title" aria-hidden="false">';b+='<div class="modal-dialog modal-dialog-centered '+n+'" role="document">';
+b+='<div class="modal-content '+l+'">';"undefined"!==typeof d&&(b+='<div class="modal-header '+k+'">',b+='<h5 class="modal-title" id="'+h+'-title">'+d+"</h5>",b+='<button type="button" class="close" data-dismiss="modal" aria-label="Close">',b+='<span aria-hidden="true">&times;</span>',b+="</button>",b+="</div>");"undefined"!==typeof e&&(b+='<div class="modal-body '+m+'">',b+=e,b+="</div>");if(0<f.length){b+='<div class="modal-footer">';for(a=0;a<f.length;a++){var c=f[a];d=c.id||h+"-"+c.type+"-"+a;
+switch(c.type){case "dismiss":b+='<button type="button" id="'+d+'" class="'+(c["class"]||"btn btn-secondary")+'" data-dismiss="modal">'+c.label+"</button>";break;case "toggle":b+='<button type="button" id="'+d+'" class="'+(c["class"]||"btn btn-secondary")+'" data-toggle="'+c.toggle+'" data-target="'+c.target+'">'+c.label+"</button>";break;default:c.type=c.type||"button",c.id=c.id||d,c["class"]=c["class"]||"btn btn-primary",b+="<button ",Object.keys(c).forEach(function(a){-1===["callback","label"].indexOf(a)&&
+(b+=a+'="'+c[a]+'"')}),b+=">"+c.label+"</button>"}if(c.hasOwnProperty("callback"))g(document).on("click","#"+d,c.callback)}b+="</div>"}b+="</div>";b+="</div>";b+="</div>";g("body").append(b);g("#"+h).modal({backdrop:p,keyboard:q,focus:r,show:!0});g("#"+h).on("hidden.bs.modal",function(a){if(0<f.length)for(a=0;a<f.length;a++){var b=f[a],c=b.id||h+"-"+b.type+"-"+a;b.hasOwnProperty("callback")&&g(document).off("click","#"+c)}g(this).remove()});return g("#"+h)}})(jQuery);
     </script>		  
     <script>
       var TYPES = ['info', 'warning', 'success', 'error'],
@@ -156,8 +193,25 @@
 });`;
 				Prism.highlightElement(document.getElementById('title-only-code'));      
       }
+
+      function content_only() {
+        var rng = Math.floor(Math.random() * TYPES.length),
+          type = TYPES[rng],
+          content = CONTENT[type];
+          
+        $.modal({
+          type: type,
+          content: content
+        });
+
+        document.getElementById('content-only-code').innerHTML = `$.modal({
+	type: "${type}",
+  	content: "${content}"
+});`;
+				Prism.highlightElement(document.getElementById('content-only-code'));      
+      }      
       
-      function buttons() {
+function buttons() {
         var rng = Math.floor(Math.random() * TYPES.length),
           type = TYPES[rng],
           title = TITLES[type],
@@ -201,6 +255,29 @@
 	] 
 });`;
 				Prism.highlightElement(document.getElementById('buttons-code'));
+      }      
+      
+      function sizes() {
+        var rng = Math.floor(Math.random() * TYPES.length),
+          type = TYPES[rng],
+          title = TITLES[type],
+          content = CONTENT[type],
+          size = ['', 'sm', 'lg', 'xl'][rng];
+
+        $.modal({
+          type: type,
+          title: title,
+          content: content,
+       		size: size // "sm", "" (default), "lg", "xl"
+        });
+
+        document.getElementById('size-code').innerHTML = `$.modal({ 		
+    type: "${type}",
+  	title: "${title}",
+  	content: "${content}",
+  	size: "${size}" // "sm", "" (default), "lg", "xl"
+});`;
+				Prism.highlightElement(document.getElementById('size-code'));
       }
     </script>
   </body>
